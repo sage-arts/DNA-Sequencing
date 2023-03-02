@@ -1,0 +1,476 @@
+        -:    0:Colorization: line numbers: hotness: [41m[K> 50%[m[K [43m[K> 20%[m[K [42m[K> 10%[m[K
+        -:    0:Source:se.cpp
+        -:    0:Graph:se.gcno
+        -:    0:Data:se.gcda
+        -:    0:Runs:1
+        -:    1[m[K:#include<bits/stdc++.h>
+        -:    2[m[K:using namespace std;
+        -:    3[m[K:
+        -:    4[m[K:const int N=4380; 
+        -:    5[m[K:const int M=4469;
+        -:    6[m[K:const int n=530;
+        -:    7[m[K:
+        -:    8[m[K:int X[N][M];
+        -:    9[m[K:int y[N];
+        -:   10[m[K:
+        -:   11[m[K:int x0[n][M];
+        -:   12[m[K:int x1[n][M];
+        -:   13[m[K:int x3[n][M];
+        -:   14[m[K:int x4[n][M];
+        -:   15[m[K:int x6[n][M];
+        -:   16[m[K:
+        -:   17[m[K:int x0t[M][n];
+        -:   18[m[K:int x1t[M][n];
+        -:   19[m[K:int x3t[M][n];
+        -:   20[m[K:int x4t[M][n];
+        -:   21[m[K:int x6t[M][n];
+        -:   22[m[K:
+        -:   23[m[K:double cov0[M][M];
+        -:   24[m[K:double cov1[M][M];
+        -:   25[m[K:double cov3[M][M];
+        -:   26[m[K:double cov4[M][M];
+        -:   27[m[K:double cov6[M][M];
+        -:   28[m[K:
+        -:   29[m[K:double icov0[M][M];
+        -:   30[m[K:double icov1[M][M];
+        -:   31[m[K:double icov3[M][M];
+        -:   32[m[K:double icov4[M][M];
+        -:   33[m[K:double icov6[M][M];
+        -:   34[m[K:
+        -:   35[m[K:double u0[M];
+        -:   36[m[K:double u1[M];
+        -:   37[m[K:double u3[M];
+        -:   38[m[K:double u4[M];
+        -:   39[m[K:double u6[M];
+        -:   40[m[K:
+        -:   41[m[K:int vec[M];
+        -:   42[m[K:double vec1[M];
+        -:   43[m[K:
+function _Z4meanPA4469_iPd called 5 returned 100% blocks executed 100%
+        5:   44[m[K:void mean(int x[][M],double u[])
+        -:   45[m[K:{
+        -:   46[m[K:     int i,j;
+    22350:   47[m[K:     for(j=0;j<M;j++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:   48[m[K:     {
+ 11865195:   49[m[K:          for(i=0;i<n;i++)
+branch  0 taken 11842850 (fallthrough)
+branch  1 taken 22345
+        -:   50[m[K:          {
+ 11842850:   51[m[K:               u[j]+=x[i][j];
+        -:   52[m[K:          }
+        -:   53[m[K:     }
+    22350:   54[m[K:     for(j=0;j<M;j++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:   55[m[K:     {
+    22345:   56[m[K:          u[j]/=n;
+        -:   57[m[K:     }
+        5:   58[m[K:}
+        -:   59[m[K:
+function _Z5shiftPA4469_iPd called 5 returned 100% blocks executed 100%
+        5:   60[m[K:void shift(int x[n][M],double u[])
+        -:   61[m[K:{
+        -:   62[m[K:     int i,j;
+     2655:   63[m[K:     for(i=0;i<n;i++)
+branch  0 taken 2650 (fallthrough)
+branch  1 taken 5
+        -:   64[m[K:     {
+ 11845500:   65[m[K:          for(j=0;j<M;j++)
+branch  0 taken 11842850 (fallthrough)
+branch  1 taken 2650
+        -:   66[m[K:          {
+ 11842850:   67[m[K:               x[i][j]-=u[j];
+        -:   68[m[K:          }
+        -:   69[m[K:     }
+        5:   70[m[K:}
+        -:   71[m[K:
+function _Z9transposePA4469_iPA530_i called 5 returned 100% blocks executed 100%
+        5:   72[m[K:void transpose(int x[n][M],int xt[M][n])
+        -:   73[m[K:{
+        -:   74[m[K:     int i,j;
+     2655:   75[m[K:     for(i=0;i<n;i++)
+branch  0 taken 2650 (fallthrough)
+branch  1 taken 5
+        -:   76[m[K:     {
+ 11845500:   77[m[K:          for(j=0;j<M;j++)
+branch  0 taken 11842850 (fallthrough)
+branch  1 taken 2650
+        -:   78[m[K:          {
+ 11842850:   79[m[K:               xt[j][i]=x[i][j];
+        -:   80[m[K:          }
+        -:   81[m[K:     }   
+        5:   82[m[K:}
+        -:   83[m[K:
+function _Z5covarPA4469_iPA530_iPA4469_d called 5 returned 100% blocks executed 100%
+        5:   84[m[K:void covar(int x[n][M],int xt[M][n],double cov[M][M])
+        -:   85[m[K:{
+        -:   86[m[K:     int i,j,k;
+    22350:   87[m[K:     for(i=0;i<M;i++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:   88[m[K:     {
+ 11865195:   89[m[K:          for(j=0;j<n;j++)
+branch  0 taken 11842850 (fallthrough)
+branch  1 taken 22345
+        -:   90[m[K:          {
+6288553350:[41m[K   91[m[K:               for(k=0;k<n;k++)
+branch  0 taken 6276710500 (fallthrough)
+branch  1 taken 11842850
+        -:   92[m[K:               {
+6276710500:[41m[K   93[m[K:                    cov[i][j]+=xt[i][k]*x[k][j];
+        -:   94[m[K:               }
+        -:   95[m[K:          }
+        -:   96[m[K:     }
+    22350:   97[m[K:     for(i=0;i<M;i++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:   98[m[K:     {
+ 11865195:   99[m[K:          for(j=0;j<n;j++)
+branch  0 taken 11842850 (fallthrough)
+branch  1 taken 22345
+        -:  100[m[K:          {
+ 11842850:  101[m[K:               cov[i][j]/=n-1;
+        -:  102[m[K:          }
+        -:  103[m[K:     }
+        5:  104[m[K:}
+        -:  105[m[K:
+function _Z10transpose1PA4469_dS0_ called 5 returned 100% blocks executed 100%
+        5:  106[m[K:void transpose1(double cov[M][M],double icov[M][M])
+        -:  107[m[K:{
+        -:  108[m[K:     int i,j;
+    22350:  109[m[K:     for(i=0;i<M;i++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:  110[m[K:     {
+ 99882150:  111[m[K:          for(j=0;j<M;j++)
+branch  0 taken 99859805 (fallthrough)
+branch  1 taken 22345
+        -:  112[m[K:          {
+ 99859805:  113[m[K:               icov[j][i]=cov[i][j];
+        -:  114[m[K:          }
+        -:  115[m[K:     }
+        5:  116[m[K:}
+        -:  117[m[K:
+function _Z3dotPiPA4469_dPd called 5 returned 100% blocks executed 100%
+        5:  118[m[K:void dot(int vec[M],double icov[M][M],double vec1[M])
+        -:  119[m[K:{
+        -:  120[m[K:     int i,j;
+    22350:  121[m[K:     for(i=0;i<M;i++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:  122[m[K:     {
+ 99882150:  123[m[K:          for(j=0;j<M;j++)
+branch  0 taken 99859805 (fallthrough)
+branch  1 taken 22345
+        -:  124[m[K:          {
+ 99859805:  125[m[K:               vec1[i]+=icov[i][j]*vec[j];
+        -:  126[m[K:          }
+        -:  127[m[K:     }
+        5:  128[m[K:}
+        -:  129[m[K:
+function _Z4dot1PiPd called 5 returned 100% blocks executed 100%
+        5:  130[m[K:double dot1(int vec[M],double vec1[M])
+        -:  131[m[K:{
+        5:  132[m[K:     double ans=0;
+        -:  133[m[K:     int i;
+    22350:  134[m[K:     for(i=0;i<M;i++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:  135[m[K:     {
+    22345:  136[m[K:          ans+=vec1[i]*vec[i];
+        -:  137[m[K:     }
+        5:  138[m[K:     return ans;
+        -:  139[m[K:}
+        -:  140[m[K:
+function _Z9clearvec1v called 5 returned 100% blocks executed 100%
+        5:  141[m[K:void clearvec1()
+        -:  142[m[K:{
+    22350:  143[m[K:     for(int i=0;i<M;i++)
+branch  0 taken 22345 (fallthrough)
+branch  1 taken 5
+        -:  144[m[K:     {
+    22345:  145[m[K:          vec1[i]=0;
+        -:  146[m[K:     }
+        5:  147[m[K:}
+        -:  148[m[K:
+function main called 1 returned 100% blocks executed 88%
+        1:  149[m[K:int main()
+        -:  150[m[K:{
+        2:  151[m[K:     string fname="data.csv";
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 1
+call    5 never executed
+        2:  152[m[K:     string line,word;
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 never executed
+call    5 never executed
+        1:  153[m[K:     fstream file(fname,ios::in);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 never executed
+        1:  154[m[K:     if(file.is_open())
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        -:  155[m[K:     {
+        1:  156[m[K:          int i=-1;
+     4382:  157[m[K:          while(getline(file,line))
+call    0 returned 4382
+branch  1 taken 4382 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 returned 4382
+branch  4 taken 4382 (fallthrough)
+branch  5 taken 0 (throw)
+branch  6 taken 4381 (fallthrough)
+branch  7 taken 1
+        -:  158[m[K:          {
+     4381:  159[m[K:               stringstream str(line);
+call    0 returned 4381
+call    1 returned 4381
+branch  2 taken 4381 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 never executed
+     4381:  160[m[K:               int j=-1;
+ 19591832:  161[m[K:               while(getline(str,word,','))
+call    0 returned 19591832
+branch  1 taken 19591832 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 returned 19591832
+branch  4 taken 19591832 (fallthrough)
+branch  5 taken 0 (throw)
+branch  6 taken 19587451 (fallthrough)
+branch  7 taken 4381
+        -:  162[m[K:               {
+ 19587451:  163[m[K:                    stringstream container(word);
+call    0 returned 19587451
+call    1 returned 19587451
+branch  2 taken 19587451 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 never executed
+ 19587451:  164[m[K:                    if(j==M)
+branch  0 taken 4381 (fallthrough)
+branch  1 taken 19583070
+        -:  165[m[K:                    {
+     4381:  166[m[K:                         container>>y[i];
+call    0 returned 4381
+branch  1 taken 4381 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  167[m[K:                    }
+ 19583070:  168[m[K:                    else if(i>-1&&j>-1)
+branch  0 taken 19578600 (fallthrough)
+branch  1 taken 4470
+branch  2 taken 19574220 (fallthrough)
+branch  3 taken 4380
+        -:  169[m[K:                    {
+ 19574220:  170[m[K:                         container>>X[i][j];
+call    0 returned 19574220
+branch  1 taken 19574220 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  171[m[K:                    }
+ 19587451:  172[m[K:                    j++;
+call    0 returned 19587451
+        -:  173[m[K:               }
+     4381:  174[m[K:               i++;
+call    0 returned 4381
+        -:  175[m[K:          }
+        -:  176[m[K:     }
+        -:  177[m[K:
+        1:  178[m[K:     int k0=0,k1=0,k3=0,k4=0,k6=0;
+     4381:  179[m[K:     for(int i=0;i<N;i++)
+branch  0 taken 4380 (fallthrough)
+branch  1 taken 1
+        -:  180[m[K:     {
+     4380:  181[m[K:          if(y[i]==0)
+branch  0 taken 531 (fallthrough)
+branch  1 taken 3849
+        -:  182[m[K:          {
+  2373570:  183[m[K:               for(int j=0;j<M;j++)
+branch  0 taken 2373039 (fallthrough)
+branch  1 taken 531
+        -:  184[m[K:               {
+  2373039:  185[m[K:                    x0[k0][j]=X[i][j];
+        -:  186[m[K:               }   
+      531:  187[m[K:               k0++; 
+        -:  188[m[K:          }
+     3849:  189[m[K:          else if(y[i]==1)
+branch  0 taken 534 (fallthrough)
+branch  1 taken 3315
+        -:  190[m[K:          {
+  2386980:  191[m[K:               for(int j=0;j<M;j++)
+branch  0 taken 2386446 (fallthrough)
+branch  1 taken 534
+        -:  192[m[K:               {
+  2386446:  193[m[K:                    x1[k1][j]=X[i][j];
+        -:  194[m[K:               }   
+      534:  195[m[K:               k1++; 
+        -:  196[m[K:          }
+     3315:  197[m[K:          else if(y[i]==3)
+branch  0 taken 672 (fallthrough)
+branch  1 taken 2643
+        -:  198[m[K:          {
+  3003840:  199[m[K:               for(int j=0;j<M;j++)
+branch  0 taken 3003168 (fallthrough)
+branch  1 taken 672
+        -:  200[m[K:               {
+  3003168:  201[m[K:                    x3[k3][j]=X[i][j];
+        -:  202[m[K:               }   
+      672:  203[m[K:               k3++; 
+        -:  204[m[K:          }
+     2643:  205[m[K:          else if(y[i]==4)
+branch  0 taken 711 (fallthrough)
+branch  1 taken 1932
+        -:  206[m[K:          {
+  3178170:  207[m[K:               for(int j=0;j<M;j++)
+branch  0 taken 3177459 (fallthrough)
+branch  1 taken 711
+        -:  208[m[K:               {
+  3177459:  209[m[K:                    x4[k4][j]=X[i][j];
+        -:  210[m[K:               }   
+      711:  211[m[K:               k4++; 
+        -:  212[m[K:          }
+     1932:  213[m[K:          else if(y[i]==6)
+branch  0 taken 1343 (fallthrough)
+branch  1 taken 589
+        -:  214[m[K:          {
+  6003210:  215[m[K:               for(int j=0;j<M;j++)
+branch  0 taken 6001867 (fallthrough)
+branch  1 taken 1343
+        -:  216[m[K:               {
+  6001867:  217[m[K:                    x6[k6][j]=X[i][j];
+        -:  218[m[K:               }   
+     1343:  219[m[K:               k6++; 
+        -:  220[m[K:          }
+        -:  221[m[K:     }
+        -:  222[m[K:
+        1:  223[m[K:     mean(x0,u0);
+call    0 returned 1
+        1:  224[m[K:     mean(x1,u1);
+call    0 returned 1
+        1:  225[m[K:     mean(x3,u3);
+call    0 returned 1
+        1:  226[m[K:     mean(x4,u4);
+call    0 returned 1
+        1:  227[m[K:     mean(x6,u6);
+call    0 returned 1
+        -:  228[m[K:
+        1:  229[m[K:     shift(x0,u0);
+call    0 returned 1
+        1:  230[m[K:     shift(x1,u1);
+call    0 returned 1
+        1:  231[m[K:     shift(x3,u3);
+call    0 returned 1
+        1:  232[m[K:     shift(x4,u4);
+call    0 returned 1
+        1:  233[m[K:     shift(x6,u6);
+call    0 returned 1
+        -:  234[m[K:
+        1:  235[m[K:     transpose(x0,x0t);
+call    0 returned 1
+        1:  236[m[K:     transpose(x1,x1t);
+call    0 returned 1
+        1:  237[m[K:     transpose(x3,x3t);
+call    0 returned 1
+        1:  238[m[K:     transpose(x4,x4t);
+call    0 returned 1
+        1:  239[m[K:     transpose(x6,x6t);
+call    0 returned 1
+        -:  240[m[K:
+        1:  241[m[K:     covar(x0,x0t,cov0);
+call    0 returned 1
+        1:  242[m[K:     covar(x1,x1t,cov1);
+call    0 returned 1
+        1:  243[m[K:     covar(x3,x3t,cov3);
+call    0 returned 1
+        1:  244[m[K:     covar(x4,x4t,cov4);
+call    0 returned 1
+        1:  245[m[K:     covar(x6,x6t,cov6);
+call    0 returned 1
+        -:  246[m[K:
+        1:  247[m[K:     transpose1(cov0,icov0);
+call    0 returned 1
+        1:  248[m[K:     transpose1(cov1,icov1);
+call    0 returned 1
+        1:  249[m[K:     transpose1(cov3,icov3);
+call    0 returned 1
+        1:  250[m[K:     transpose1(cov4,icov4);
+call    0 returned 1
+        1:  251[m[K:     transpose1(cov6,icov6);
+call    0 returned 1
+        -:  252[m[K:
+        1:  253[m[K:     double Max=DBL_MIN;
+        1:  254[m[K:     int label=-1;
+     4470:  255[m[K:     for(int i=0;i<M;i++)
+branch  0 taken 4469 (fallthrough)
+branch  1 taken 1
+        -:  256[m[K:     {
+     4469:  257[m[K:          vec[i]=x6[0][i];
+        -:  258[m[K:     }
+        1:  259[m[K:     clearvec1();
+call    0 returned 1
+        1:  260[m[K:     dot(vec,icov0,vec1);
+call    0 returned 1
+        1:  261[m[K:     if(dot1(vec,vec1)>Max) label=0;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        -:  262[m[K:
+        1:  263[m[K:     clearvec1();
+call    0 returned 1
+        1:  264[m[K:     dot(vec,icov1,vec1);
+call    0 returned 1
+        1:  265[m[K:     if(dot1(vec,vec1)>Max) label=1;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        -:  266[m[K:
+        1:  267[m[K:     clearvec1();
+call    0 returned 1
+        1:  268[m[K:     dot(vec,icov3,vec1);
+call    0 returned 1
+        1:  269[m[K:     if(dot1(vec,vec1)>Max) label=3;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        -:  270[m[K:
+        1:  271[m[K:     clearvec1();
+call    0 returned 1
+        1:  272[m[K:     dot(vec,icov4,vec1);
+call    0 returned 1
+        1:  273[m[K:     if(dot1(vec,vec1)>Max) label=4;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        -:  274[m[K:
+        1:  275[m[K:     clearvec1();
+call    0 returned 1
+        1:  276[m[K:     dot(vec,icov6,vec1);
+call    0 returned 1
+        1:  277[m[K:     if(dot1(vec,vec1)>Max) label=6;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:  278[m[K:     cout<<"Class label of the test sequence is: "<<label<<endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        -:  279[m[K:
+        1:  280[m[K:     return 0;
+call    0 returned 1
+        -:  281:}
