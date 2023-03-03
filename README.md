@@ -41,7 +41,9 @@ High percentage of branches are taken as the condition of loops only fails once.
 ## Hardware resource profiling- likwid
 The machine on which we are running our program has a single socket with six cores
 and there are two threads per core. Each core has private L1 cache of size 32 kB and
-private L2 cache of size 256 kB. L3 cache is shared with size of 12 MB.
+private L2 cache of size 256 kB. L3 cache is shared with size of 12 MB.  
+
+![image](https://user-images.githubusercontent.com/78209498/222810929-0bb04665-f80a-49bb-9f11-5886d5d2cdca.png)
 
 ## OpenMP
 ### Code
@@ -91,7 +93,9 @@ Thread | Time | f(Parallelization fraction)
 24 | 7.66674 | 0.706961657
 32 | 8.63845 | 0.657167219
 64 | 11.9971 | 0.503214638
-128 | 18.8138 | 0.210255683
+128 | 18.8138 | 0.210255683  
+
+![image](https://user-images.githubusercontent.com/78209498/222811111-ca464b6c-33fc-47b2-a7bc-6379f6011e61.png)
 
 ## MPI
 ### Code
@@ -130,7 +134,10 @@ Processors | Speedup
 24 | 14.14582088
 32 | 14.45452455
 64 | 27.56675762
-128 | 27.33898583
+128 | 27.33898583  
+
+![image](https://user-images.githubusercontent.com/78209498/222811334-c20cd95f-c575-426c-88dd-002e77e998f9.png)
+
 
 ### Parallelization fraction
 Thread | Time | f(Parallelization fraction)
